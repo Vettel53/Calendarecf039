@@ -1,13 +1,18 @@
 package a5.calendar;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import a5.calendar.controller.EventController;
+import a5.calendar.model.Event;
 import a5.calendar.model.EventCreation;
 import a5.calendar.view.Adapter;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,15 +40,36 @@ public class MainActivity extends AppCompatActivity {
         Adapter adapter = new Adapter(eventCreate.getEvents(), this);
         recyclerView.setAdapter(adapter);
 
-        // TODO: Instantiate Controller (I think this is the thing for sorting)
+        // Instantiate Controller
+        List<Event> events = eventCreate.getEvents();
+        events.sort(EventController.BY_DATE_THEN_CATEGORY_THEN_NAME);
+        adapter.notifyDataSetChanged();
 
+        // Instantiate Buttons
+        Button sortByDate = findViewById(R.id.sort_by_date);
+        Button sortByName = findViewById(R.id.sort_by_name);
+        Button sortByCategory = findViewById(R.id.sort_by_category);
+
+        // Instantiate Button setOnClickListeners
+        sortByDate.setOnClickListener(v -> {
+            events.sort(EventController.BY_DATE_THEN_CATEGORY_THEN_NAME);
+            adapter.notifyDataSetChanged();
+        });
+
+        sortByName.setOnClickListener(v -> {
+            events.sort(EventController.BY_NAME_THEN_DATE_THEN_CATEGORY);
+            adapter.notifyDataSetChanged();
+        });
+
+        sortByCategory.setOnClickListener(v -> {
+            events.sort(EventController.BY_CATEGORY_THEN_DATE_THEN_NAME);
+            adapter.notifyDataSetChanged();
+        });
         /**
          * NOTE: For my teammates, most of this was extracted/learned-from the slides
          * ("23_Catch_Assets_RecyclerView.pdf" in the class files) and ("25_2nd_Activity.pdf)
-         * */
-
-        // TODO: Set sort buttons onClickListeners
-        // TODO: UML Diagram
+         *
+         */
 
     }
 }
