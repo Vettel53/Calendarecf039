@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Instantiate Controller
         List<Event> events = eventCreate.getEvents();
-        events.sort(EventController.BY_DATE_THEN_CATEGORY_THEN_NAME);
+        events.sort(EventController.BY_DATE_CATEGORY_NAME);
         adapter.notifyDataSetChanged();
 
         // Instantiate Buttons
@@ -52,17 +52,17 @@ public class MainActivity extends AppCompatActivity {
 
         // Instantiate Button setOnClickListeners
         sortByDate.setOnClickListener(v -> {
-            events.sort(EventController.BY_DATE_THEN_CATEGORY_THEN_NAME);
+            events.sort(EventController.BY_DATE_CATEGORY_NAME);
             adapter.notifyDataSetChanged();
         });
 
         sortByName.setOnClickListener(v -> {
-            events.sort(EventController.BY_NAME_THEN_DATE_THEN_CATEGORY);
+            events.sort(EventController.BY_NAME_DATE_CATEGORY);
             adapter.notifyDataSetChanged();
         });
 
         sortByCategory.setOnClickListener(v -> {
-            events.sort(EventController.BY_CATEGORY_THEN_DATE_THEN_NAME);
+            events.sort(EventController.BY_CATEGORY_DATE_NAME);
             adapter.notifyDataSetChanged();
         });
         /**
