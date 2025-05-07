@@ -1,5 +1,8 @@
 package a5.calendar.model;
 
+/**
+ * Represents an event with details including category, name, location, date, price, and description.
+ */
 public class Event {
     // Might be able to store these all in string? Probably not cause of sorting shit
     private String category;
@@ -10,6 +13,13 @@ public class Event {
     private String price;
     private String description;
 
+
+    /**
+     * Constructs an Event object by parsing through a comma separated input string.
+     *
+     * @param currLine A string containing event details in the format:
+     *                 "category, name, location, month, day, price,  description"
+     */
     public Event(String currLine) {
         // Store the entire line into parts, then store those parts correctly like in Slide 29 in Catch_Assets_RecyclerView
         String[] parts = currLine.split(",");
